@@ -1,0 +1,7 @@
+version: '3'
+services:
+  trade-bot:
+    build: .
+    container_name: trade-bot
+    restart: always
+    env_file: .env

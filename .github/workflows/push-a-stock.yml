@@ -1,0 +1,23 @@
+name: Push A-Stock Report
+
+on:
+  schedule:
+    - cron: '5 7 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm install
+      - run: node src/scripts/push-a.js
+        env:
+          WECHAT_WEBHOOKS: ${{ secrets.WECHAT_WEBHOOKS }}
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+          GLM_MODEL: glm-4-flash
+          GLM_BASE_URL: https://open.bigmodel.cn/api/paas/v4
+          SINA_HQ_URL: https://hq.sinajs.cn

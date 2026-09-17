@@ -1,4 +1,5 @@
-import { generateAStockReport, generateUSStockReport } from '../report/generator.js';
+require('dotenv/config');
+const { generateAStockReport, generateUSStockReport } = require('../report/generator');
 
 async function main() {
   console.log('测试A股报告生成...\n');

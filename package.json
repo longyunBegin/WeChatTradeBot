@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "股市早报机器人 - 每日自动推送A股/美股早报到企业微信群",
   "main": "src/index.js",
-  "type": "module",
+
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --watch src/index.js",

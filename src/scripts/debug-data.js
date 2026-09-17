@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const client = axios.create({
   baseURL: 'https://hq.sinajs.cn',
@@ -31,7 +31,6 @@ async function debugFetch(label, codes) {
 async function main() {
   await debugFetch('A股', 'sh000001,sz399001,sz399006,sh000300');
   await debugFetch('美股', 'gb_dji,gb_ixic,gb_inx');
-  await debugFetch('港股', 'rt_hkHSI,rt_hkHSTE');
 }
 
 main();

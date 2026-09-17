@@ -1,8 +1,8 @@
-import schedule from 'node-schedule';
-import config from '../config/index.js';
-import { isTradingDay } from '../data/calendar.js';
-import { sendToRooms, isBotReady } from '../bot/wechat.js';
-import { generateAStockReport, generateUSStockReport } from '../report/generator.js';
+const schedule = require('node-schedule');
+const config = require('../config');
+const { isTradingDay } = require('../data/calendar');
+const { sendToRooms, isBotReady } = require('../bot/wechat');
+const { generateAStockReport, generateUSStockReport } = require('../report/generator');
 
 let aStockJob = null;
 let usStockJob = null;
@@ -52,7 +52,7 @@ function parseTime(timeStr) {
   return { hour, minute };
 }
 
-export function startScheduler() {
+function startScheduler() {
   const aTime = parseTime(config.schedule.aStockPushTime);
   const usTime = parseTime(config.schedule.usStockPushTime);
 
@@ -72,7 +72,7 @@ export function startScheduler() {
   console.log(`[scheduler] 美股推送: 每天 ${config.schedule.usStockPushTime}`);
 }
 
-export function stopScheduler() {
+function stopScheduler() {
   if (aStockJob) aStockJob.cancel();
   if (usStockJob) usStockJob.cancel();
   aStockJob = null;
@@ -80,4 +80,4 @@ export function stopScheduler() {
   console.log('[scheduler] 定时任务已停止');
 }
 
-export { runAStockPush, runUSStockPush };
+module.exports = { startScheduler, stopScheduler, runAStockPush, runUSStockPush };

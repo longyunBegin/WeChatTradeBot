@@ -1,6 +1,6 @@
-import { getAStockData, getUSStockData, getTopSectors, getTimestamp } from '../data/stock.js';
-import { generateAStockAnalysis, generateUSStockAnalysis } from '../ai/glm.js';
-import { getDateStr } from '../data/calendar.js';
+const { getAStockData, getUSStockData, getTopSectors, getTimestamp } = require('../data/stock');
+const { generateAStockAnalysis, generateUSStockAnalysis } = require('../ai/glm');
+const { getDateStr } = require('../data/calendar');
 
 function formatNumber(num) {
   return num.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -54,7 +54,7 @@ function formatSectors(sectors) {
   return sectors.map(formatSectorLine).join('\n');
 }
 
-export async function generateAStockReport() {
+async function generateAStockReport() {
   console.log('[report] 开始生成A股收盘报告...');
 
   const [aStock, sectors] = await Promise.all([
@@ -102,7 +102,7 @@ export async function generateAStockReport() {
   ].join('\n');
 }
 
-export async function generateUSStockReport() {
+async function generateUSStockReport() {
   console.log('[report] 开始生成美股行情报告...');
 
   const usStock = await getUSStockData();
@@ -143,3 +143,5 @@ export async function generateUSStockReport() {
     '⚠️ 以上内容由AI生成，仅供参考，不构成投资建议',
   ].join('\n');
 }
+
+module.exports = { generateAStockReport, generateUSStockReport };

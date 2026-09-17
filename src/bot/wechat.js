@@ -1,5 +1,5 @@
-import axios from 'axios';
-import config from '../config/index.js';
+const axios = require('axios');
+const config = require('../config');
 
 async function sendToWebhook(webhookUrl, message) {
   const resp = await axios.post(webhookUrl, {
@@ -17,7 +17,7 @@ async function sendToWebhook(webhookUrl, message) {
   }
 }
 
-export async function sendToRooms(message) {
+async function sendToRooms(message) {
   const webhooks = config.wechat.webhooks;
   if (webhooks.length === 0) {
     throw new Error('未配置 Webhook (WECHAT_WEBHOOKS)');
@@ -39,11 +39,11 @@ export async function sendToRooms(message) {
   return results;
 }
 
-export function isBotReady() {
+function isBotReady() {
   return config.wechat.webhooks.length > 0;
 }
 
-export async function initBot() {
+async function initBot() {
   const webhooks = config.wechat.webhooks;
   if (webhooks.length === 0) {
     throw new Error('未配置 Webhook，请在 .env 中设置 WECHAT_WEBHOOKS');
@@ -51,3 +51,5 @@ export async function initBot() {
   console.log(`[bot] 企业微信群机器人已配置 ${webhooks.length} 个 Webhook`);
   return true;
 }
+
+module.exports = { sendToRooms, isBotReady, initBot };

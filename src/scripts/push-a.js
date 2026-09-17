@@ -1,6 +1,7 @@
-import { isTradingDay } from '../data/calendar.js';
-import { generateAStockReport } from '../report/generator.js';
-import { sendToRooms } from '../bot/wechat.js';
+require('dotenv/config');
+const { isTradingDay } = require('../data/calendar');
+const { generateAStockReport } = require('../report/generator');
+const { sendToRooms } = require('../bot/wechat');
 
 async function main() {
   if (!isTradingDay()) {

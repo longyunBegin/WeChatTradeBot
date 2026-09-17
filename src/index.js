@@ -1,7 +1,8 @@
-import { initBot } from './bot/wechat.js';
-import { startScheduler } from './scheduler/cron.js';
-import { isTradingDay } from './data/calendar.js';
-import config from './config/index.js';
+require('dotenv/config');
+const { initBot } = require('./bot/wechat');
+const { startScheduler } = require('./scheduler/cron');
+const { isTradingDay } = require('./data/calendar');
+const config = require('./config');
 
 async function main() {
   console.log('========================================');
@@ -21,7 +22,7 @@ async function main() {
 
     process.on('SIGINT', async () => {
       console.log('\n[main] 正在关闭...');
-      const { stopScheduler } = await import('./scheduler/cron.js');
+      const { stopScheduler } = require('./scheduler/cron');
       stopScheduler();
       process.exit(0);
     });

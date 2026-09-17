@@ -1,5 +1,6 @@
-import { generateUSStockReport } from '../report/generator.js';
-import { sendToRooms } from '../bot/wechat.js';
+require('dotenv/config');
+const { generateUSStockReport } = require('../report/generator');
+const { sendToRooms } = require('../bot/wechat');
 
 async function main() {
   console.log('[push-us] 开始推送美股报告...');

@@ -43,7 +43,7 @@ function getHolidaySet(year) {
   }
 }
 
-export function isTradingDay(date = new Date()) {
+function isTradingDay(date = new Date()) {
   const dayOfWeek = date.getDay();
   if (dayOfWeek === 0 || dayOfWeek === 6) {
     return false;
@@ -56,7 +56,7 @@ export function isTradingDay(date = new Date()) {
   return true;
 }
 
-export function getNextTradingDay(date = new Date()) {
+function getNextTradingDay(date = new Date()) {
   const next = new Date(date);
   next.setDate(next.getDate() + 1);
   while (!isTradingDay(next)) {
@@ -65,4 +65,4 @@ export function getNextTradingDay(date = new Date()) {
   return next;
 }
 
-export { getDateStr };
+module.exports = { isTradingDay, getNextTradingDay, getDateStr };

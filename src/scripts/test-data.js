@@ -1,4 +1,4 @@
-import { getAStockData, getUSStockData, getTopSectors, getTimestamp } from '../data/stock.js';
+const { getAStockData, getUSStockData, getTopSectors, getTimestamp } = require('../data/stock');
 
 async function main() {
   console.log('测试股市数据获取...\n');

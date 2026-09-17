@@ -1,5 +1,5 @@
-import axios from 'axios';
-import config from '../config/index.js';
+const axios = require('axios');
+const config = require('../config');
 
 const glmClient = axios.create({
   baseURL: config.glm.baseUrl,
@@ -67,7 +67,7 @@ ${formatIndicesWithVolume(usStock)}
 请生成美股行情回顾，包含：1) 三大指数综述(含成交量分析) 2) 走势分析 3) 对今日A股可能的影响 4) 关注要点`;
 }
 
-export async function generateAStockAnalysis(aStockData, sectors, timestamp) {
+async function generateAStockAnalysis(aStockData, sectors, timestamp) {
   if (!config.glm.apiKey || config.glm.apiKey === 'your_glm_api_key_here') {
     throw new Error('GLM_API_KEY 未配置');
   }
@@ -83,7 +83,7 @@ export async function generateAStockAnalysis(aStockData, sectors, timestamp) {
   return resp.data.choices[0].message.content;
 }
 
-export async function generateUSStockAnalysis(usStockData, timestamp) {
+async function generateUSStockAnalysis(usStockData, timestamp) {
   if (!config.glm.apiKey || config.glm.apiKey === 'your_glm_api_key_here') {
     throw new Error('GLM_API_KEY 未配置');
   }
@@ -99,7 +99,7 @@ export async function generateUSStockAnalysis(usStockData, timestamp) {
   return resp.data.choices[0].message.content;
 }
 
-export async function testConnection() {
+async function testConnection() {
   if (!config.glm.apiKey || config.glm.apiKey === 'your_glm_api_key_here') {
     return false;
   }
@@ -114,3 +114,5 @@ export async function testConnection() {
     return false;
   }
 }
+
+module.exports = { generateAStockAnalysis, generateUSStockAnalysis, testConnection };

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import config from '../config/index.js';
+const axios = require('axios');
+const config = require('../config');
 
 const sinaClient = axios.create({
   baseURL: config.sina.hqUrl,
@@ -171,9 +171,4 @@ function getTimestamp() {
   return new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' });
 }
 
-export {
-  getAStockData,
-  getUSStockData,
-  getTopSectors,
-  getTimestamp,
-};
+module.exports = { getAStockData, getUSStockData, getTopSectors, getTimestamp };
